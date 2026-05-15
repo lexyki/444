@@ -1,0 +1,61 @@
+class Product:
+    """Клас, що описує товар."""
+
+    def __init__(self, name, price, rating, sold):
+        self.name = name
+        self.price = price      # грн
+        self.rating = rating    # 1.0 - 5.0
+        self.sold = sold        # кількість продажів
+
+    def display(self):
+        """Виводить інформацію про товар."""
+        print(f"  {self.name}: ціна = {self.price:.0f} грн, "
+              f"рейтинг = {self.rating}, продано = {self.sold} шт.")
+
+
+def bubble_sort_by_rating(products):
+    """Сортує товари за рейтингом за спаданням."""
+    n = len(products)
+    for i in range(n - 1):
+        for j in range(n - 1 - i):
+            if products[j].rating < products[j + 1].rating:
+                products[j], products[j + 1] = products[j + 1], products[j]
+
+
+def bubble_sort_by_price(products):
+    """Сортує товари за ціною за зростанням."""
+    n = len(products)
+    for i in range(n - 1):
+        for j in range(n - 1 - i):
+            if products[j].price > products[j + 1].price:
+                products[j], products[j + 1] = products[j + 1], products[j]
+
+
+# --- Основна програма ---
+products = [
+    Product("Навушники", 1200, 4.5, 340),
+    Product("Клавіатура", 850, 4.8, 210),
+    Product("Мишка", 450, 4.2, 580),
+    Product("Монітор", 8500, 4.9, 95),
+    Product("Вебкамера", 1600, 3.8, 150),
+    Product("USB-хаб", 320, 4.1, 420),
+    Product("Килимок", 250, 4.6, 710),
+]
+
+# Копіюємо списки для окремого сортування
+products_by_rating = products.copy()
+products_by_price = products.copy()
+
+# Топ-3 за рейтингом
+bubble_sort_by_rating(products_by_rating)
+print("=== Топ-3 товари за рейтингом ===")
+for i in range(3):
+    print(f"{i + 1}.", end="")
+    products_by_rating[i].display()
+
+# Топ-3 найдешевші
+bubble_sort_by_price(products_by_price)
+print("\n=== Топ-3 найдешевші товари ===")
+for i in range(3):
+    print(f"{i + 1}.", end="")
+    products_by_price[i].display()
