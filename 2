@@ -1,0 +1,42 @@
+class Country:
+    """Клас, що описує країну."""
+
+    def __init__(self, name, population, area):
+        self.name = name
+        self.population = population  # млн осіб
+        self.area = area              # тис. км²
+
+    def display(self):
+        """Виводить інформацію про країну."""
+        print(f"  {self.name}: населення = {self.population} млн, площа = {self.area} тис. км²")
+
+
+def bubble_sort_by_population(countries):
+    """Сортує список країн за населенням за спаданням."""
+    n = len(countries)
+    for i in range(n - 1):
+        for j in range(n - 1 - i):
+            if countries[j].population < countries[j + 1].population:
+                countries[j], countries[j + 1] = countries[j + 1], countries[j]
+
+
+# --- Основна програма ---
+countries = [
+    Country("Україна", 37.0, 603.6),
+    Country("Польща", 38.0, 312.7),
+    Country("Німеччина", 84.5, 357.6),
+    Country("Франція", 68.2, 640.7),
+    Country("Іспанія", 47.8, 505.9),
+    Country("Португалія", 10.3, 92.2),
+]
+
+print("=== Усі країни (до сортування) ===")
+for country in countries:
+    country.display()
+
+bubble_sort_by_population(countries)
+
+print("\n=== Топ-3 країни за населенням ===")
+for i in range(3):
+    print(f"{i + 1}.", end="")
+    countries[i].display()
